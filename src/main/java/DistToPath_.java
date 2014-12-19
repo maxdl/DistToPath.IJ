@@ -21,13 +21,14 @@ import ij.ImagePlus;
 import ij.io.*;
 import ij.gui.*;
 import ij.plugin.frame.*;
+import ij.plugin.filter.*;
 import ij.measure.*;
 
 
 interface VersionDTP {
     String title = "DistToPath";
     String author = "Max Larsson";
-    String version = "1.0.1";
+    String version = "1.0.2";
     String year = "2014";
     String month = "December";
     String day = "19";
@@ -85,7 +86,9 @@ public class DistToPath_ extends PlugInFrame implements OptionsDTP, ActionListen
         addButton("Path");
         addButton("Points");
         addButton("Positive polarity");
-        addButton("Hole");        
+        addButton("Hole");
+        panel.add(new Label(""));
+        addButton("Define thresholded particles as points");
         panel.add(new Label(""));
         addButton("Place random points");
         panel.add(new Label(""));
@@ -330,6 +333,15 @@ public class DistToPath_ extends PlugInFrame implements OptionsDTP, ActionListen
                 profile.overlay.add(p);
                 profile.dirty = true;
             }
+        }
+        if (command.equals("Define thresholded particles as points")) {
+            if (!isImage(imp) || !profile.isSameImage(imp)) {
+                return;
+            }
+            RoiManager rm = new RoiManager();
+            ParticleAnalyzer.setRoiManager(rm);
+            ParticleAnalyzer pa = new ParticleAnalyzer();
+            pa.analyze(imp);
         }
         if (command.equals("Place random points")) {
             if (!isImage(imp) || !profile.isSameImage(imp) ||
