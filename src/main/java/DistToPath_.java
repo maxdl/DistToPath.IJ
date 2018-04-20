@@ -28,12 +28,12 @@ import ij.measure.*;
 interface VersionDTP {
     String title = "DistToPath";
     String author = "Max Larsson";
-    String version = "2.0.0";
+    String version = "2.0.1";
     String year = "2018";
     String month = "April";
-    String day = "17";
+    String day = "20";
     String email = "max.larsson@liu.se";
-    String homepage = "http://www.hu.liu.se/forskning/larsson-max/software";
+    String homepage = "http://www.liu.se/medfak/forskning/larsson-max/software";
 }
 
 interface OptionsDTP {
